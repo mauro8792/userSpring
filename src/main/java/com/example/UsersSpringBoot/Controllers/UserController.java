@@ -20,9 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping(value = "/")
     public List getAllUsers(){
         List<User> usersAlls = userService.getAllUsers();
         return usersAlls;
     }
+    //url: jdbc:mysql://localhost:3306/usersspring?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 }

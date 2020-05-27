@@ -1,20 +1,23 @@
 package com.example.UsersSpringBoot.Models;
 
 public class User {
-    private Long id;
+    private Integer id;
     private String name;
     private String user_name;
+
+    public User() {
+    }
 
     public User(String name, String user_name) {
         this.name = name;
         this.user_name = user_name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

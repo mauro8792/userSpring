@@ -16,7 +16,7 @@ public class UserService {
     public UserService(DaoUser daoUser) {
         this.daoUser = daoUser;
     }
-    public List getAllUsers (){
+    public List getAllUsers(){
         List<User> users=null;
         try {
             users=this.daoUser.findAll();
