@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,7 +17,7 @@ public class UserService {
     public UserService(DaoUser daoUser) {
         this.daoUser = daoUser;
     }
-    public List getAllUsers (){
+    public List getAllUsers(){
         List<User> users=null;
         try {
             users=this.daoUser.findAll();
@@ -25,5 +26,15 @@ public class UserService {
             e.getMessage();
         }
         return users;
+    }
+    public Optional<User> getById(Long id){
+        User user = new User();
+        return this.daoUser.findById(id);
+    }
+    public Boolean updateUser(User us){
+        Boolean modi = false;
+        System.out.println(this.daoUser.updateUser(us));
+        return modi;
+
     }
 }
