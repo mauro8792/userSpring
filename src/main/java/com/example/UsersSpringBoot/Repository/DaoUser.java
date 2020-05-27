@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DaoUser   {
@@ -19,8 +20,19 @@ public class DaoUser   {
     public List<User> findAll(){
         List<User> users = new ArrayList<>();
         users =jdbc.query("select * from users", new BeanPropertyRowMapper(User.class));
-
         return users;
+    }
+
+    public Optional<User> findById(Long id){
+        return jdbc.queryForObject("select * from users where id = ?",
+                new Object[]{id},
+                (rs,rowNum)->
+                    Optional.of(new User(
+                            (long) rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("username")
+                    ))
+        );
     }
 
 }
