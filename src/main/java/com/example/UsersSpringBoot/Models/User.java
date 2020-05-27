@@ -3,15 +3,15 @@ package com.example.UsersSpringBoot.Models;
 public class User {
     private Long id;
     private String name;
-    private String user_name;
+    private String userName;
 
     public User() {
     }
 
-    public User(Long id,String name, String user_name) {
+    public User(Long id,String name, String userName) {
         this.id = id;
         this.name = name;
-        this.user_name = user_name;
+        this.userName = userName;
     }
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class User {
         this.name = name;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

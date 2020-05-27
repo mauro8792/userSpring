@@ -30,6 +30,11 @@ public class UserService {
     public Optional<User> getById(Long id){
         User user = new User();
         return this.daoUser.findById(id);
+    }
+    public Boolean updateUser(User us){
+        Boolean modi = false;
+        System.out.println(this.daoUser.updateUser(us));
+        return modi;
 
     }
 }
