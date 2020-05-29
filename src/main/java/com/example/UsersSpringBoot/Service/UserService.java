@@ -5,8 +5,10 @@ import com.example.UsersSpringBoot.Repository.DaoUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserService {
@@ -17,6 +19,7 @@ public class UserService {
     public UserService(DaoUser daoUser) {
         this.daoUser = daoUser;
     }
+
     public List getAllUsers(){
         List<User> users=null;
         try {
@@ -27,13 +30,20 @@ public class UserService {
         }
         return users;
     }
-    public Optional<User> getById(Long id){
-        User user = new User();
-        return this.daoUser.findById(id);
+    public User getById(Long id){
+        User user = null;
+        try {
+            user= this.daoUser.findById(id);
+
+        }catch ( Exception  e){
+            e.getMessage();
+        }
+        return user;
     }
     public Boolean updateUser(User us){
         Boolean modi = false;
-        System.out.println(this.daoUser.updateUser(us));
+        if (this.daoUser.updateUser(us)==1)
+            modi = true;
         return modi;
 
     }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -20,18 +19,25 @@ public class UserController {
     }
 
     @GetMapping(value = "/")
-    public List getAllUsers(){
+    public List getAllUsers() {
         List<User> usersAlls = userService.getAllUsers();
         return usersAlls;
     }
+
     @GetMapping(value = "/{id}")
-    public Optional<User> getById(@PathVariable("id") Long id){
-        Optional<User> user1 = userService.getById(id);
+    public User getById(@PathVariable("id") Long id) {
+        User user1 = this.userService.getById(id);
         return user1;
     }
-    @PutMapping(value = "/")
-    public void modifyCabin(@RequestBody User user1) {
-        this.userService.updateUser(user1);
+
+    @PutMapping(value = "/{id}")
+    public Boolean modifyUser(@RequestBody User user1, @PathVariable Long id) {
+        boolean rtn = false;
+        User userOld = this.userService.getById(id);
+        System.out.println(userOld.getName());
+        if (userOld.equals(null))
+            rtn = this.userService.updateUser(user1);
+
+        return rtn;
     }
-    //url: jdbc:mysql://localhost:3306/usersspring?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 }

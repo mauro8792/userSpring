@@ -1,5 +1,7 @@
 package com.example.UsersSpringBoot.Models;
 
+import java.util.Objects;
+
 public class User {
     private Long id;
     private String name;
@@ -36,5 +38,20 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId()) &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getUserName(), user.getUserName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getUserName());
     }
 }
